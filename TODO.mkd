@@ -1,3 +1,5 @@
 # TODO
 
+- documentation
+- add tests
 - implement Turbo Boyer-Moore in lib/buffer.js
