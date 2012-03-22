@@ -14,6 +14,7 @@
   },
   
   "dependencies": {
+    "mime":  ">= 1.2.5",
     "codes": ">= 0.1.2"
   },
   "devDependencies": {},
