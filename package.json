@@ -14,8 +14,9 @@
   },
   
   "dependencies": {
-    "mime":  ">= 1.2.5",
-    "codes": ">= 0.1.2"
+    "xregexp": ">= 1.5.0",
+    "mime":    ">= 1.2.5",
+    "codes":   ">= 0.1.2"
   },
   "devDependencies": {},
   "engine": {
