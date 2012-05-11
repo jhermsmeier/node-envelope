@@ -21,8 +21,8 @@
   },
   
   "dependencies": {
-    "mime":    "1.2.x",
-    "codes":   "0.1.x"
+    "mime-lib": "*",
+    "codes": "0.1.x"
   },
   
   "devDependencies": {
