@@ -3,7 +3,7 @@
   "name": "envelope",
   "version": "0.0.1-alpha",
   "license": "MIT",
-  "description": "",
+  "description": "Parse raw emails into structured objects",
   "kewords": [
     
   ],
