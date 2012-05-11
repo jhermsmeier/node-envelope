@@ -1,5 +1,5 @@
 
-var buffer = require( './buffer' )
+var buffer = require( './lib/buffer' )
 
 function Envelope( mail ) {
   
@@ -16,9 +16,9 @@ function Envelope( mail ) {
   
 }
 
-Envelope.Trace  = require( './trace' )
-Envelope.Header = require( './header' )
-Envelope.Body   = require( './body' )
+Envelope.Trace  = require( './lib/trace' )
+Envelope.Header = require( './lib/header' )
+Envelope.Body   = require( './lib/body' )
 
 Envelope.parse = function( mail ) {
   return new Envelope( mail )
