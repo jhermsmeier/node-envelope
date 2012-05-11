@@ -14,21 +14,30 @@
     "url": "http://jhermsmeier.de"
   },
   
+  "main": "envelope.js",
+  
+  "engine": {
+    "node": "0.6.x"
+  },
+  
   "dependencies": {
     "mime":    "1.2.x",
     "codes":   "0.1.x"
   },
+  
   "devDependencies": {
-    "mocha": "1.0.x"
+    "mocha": "*"
   },
-  "engine": {
-    "node": "0.6.x"
+  
+  "scripts": {
+    "test": "mocha"
   },
   
   "repository": {
     "type": "git",
     "url": "git@github.com:jhermsmeier/node-envelope.git"
   },
+  
   "bugs": {
     "url": "https://github.com/jhermsmeier/node-envelope/issues"
   }
