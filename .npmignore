@@ -1,2 +1,42 @@
+# Numerous always-ignore extensions
+*.ignore
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Windows image file caches
+Thumbs.db 
+
+# Folder config file
+Desktop.ini
+
+# Commit text file
+.commit
+
+# npm packages folder
+/node_modules
+
+# SublimeText project files
+/*.sublime*
+
+# Wiki repositories in their git repo
+/*.wiki
+
 # Ignore /test for now, as it holds sensitive data
 /test
