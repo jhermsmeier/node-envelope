@@ -11,8 +11,9 @@ function Envelope( mail ) {
   this.header   = {}
   this.body     = {}
   
-  if( mail != null )
+  if( mail != null ) {
     this.parse()
+  }
   
 }
 
