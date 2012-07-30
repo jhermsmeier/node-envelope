@@ -16,16 +16,13 @@
   
   "main": "envelope.js",
   
-  "engine": {
-    "node": "0.6.x"
-  },
-  
   "dependencies": {
-    "mime-lib": "*"
+    "mime-lib": ""
   },
   
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "",
+    "benchmark": ""
   },
   
   "scripts": {
