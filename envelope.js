@@ -6,12 +6,11 @@ function Envelope( mail ) {
   if( !(this instanceof Envelope) )
     return new Envelope( mail )
   
-  this.original = mail
-  this.header   = {}
-  this.body     = {}
+  this.header = null
+  this.body   = null
   
   if( mail != null ) {
-    this.parse()
+    this.parse( mail )
   }
   
 }
@@ -27,24 +26,20 @@ Envelope.prototype = {
   
   parse: function( source ) {
     
-    if( source != null ) {
-      this.original = source
-    }
-    
-    if( !Buffer.isBuffer( this.original ) ) {
-      this.original = new Buffer( this.original )
+    if( !Buffer.isBuffer( source ) ) {
+      source = new Buffer( source )
     }
     
     var boundary = buffer.indexOf(
       new Buffer( "\r\n\r\n" ),
-      this.original
+      source
     )
     
-    var header = this.original.slice( 0, boundary )
-    var body   = this.original.slice( boundary )
+    var header = source.slice( 0, boundary )
+    var body   = source.slice( boundary )
     
     this.header = new Envelope.Header( header )
-    // this.body   = new Envelope.Body
+    // this.body   = new Envelope.Body( body )
     this.body   = body
     
   },
