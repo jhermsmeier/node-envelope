@@ -1,17 +1,32 @@
 
 var buffer = require( './lib/buffer' )
 
+/**
+ * Envelope
+ * @param {String|Buffer} mail
+ */
 function Envelope( mail ) {
   
   if( !(this instanceof Envelope) )
     return new Envelope( mail )
   
-  this.header = null
-  this.body   = null
+  var boundary
   
-  if( mail != null ) {
-    this.parse( mail )
-  }
+  if( !Buffer.isBuffer( mail ) )
+    mail = new Buffer( mail )
+  
+  boundary = new Buffer( "\r\n\r\n" )
+  boundary = buffer.indexOf( boundary, mail )
+  
+  this.header = new Envelope.Header(
+    mail.slice( 0, boundary )
+  )
+  
+  // this.body = new Envelope.Body(
+  //   mail.slice( boundary )
+  // )
+  
+  this.body = mail.slice( boundary )
   
 }
 
@@ -22,27 +37,11 @@ Envelope.parse = function( mail ) {
   return new Envelope( mail )
 }
 
+/**
+ * Envelope prototype
+ * @type {Object}
+ */
 Envelope.prototype = {
-  
-  parse: function( source ) {
-    
-    if( !Buffer.isBuffer( source ) ) {
-      source = new Buffer( source )
-    }
-    
-    var boundary = buffer.indexOf(
-      new Buffer( "\r\n\r\n" ),
-      source
-    )
-    
-    var header = source.slice( 0, boundary )
-    var body   = source.slice( boundary )
-    
-    this.header = new Envelope.Header( header )
-    // this.body   = new Envelope.Body( body )
-    this.body   = body
-    
-  },
   
 }
 
