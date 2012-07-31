@@ -41,7 +41,7 @@ Envelope.prototype = {
   parseHeader: function( header ) {
     
     // Buffer -> String
-    header = header + ''
+    header = header.toString()
     // Unfold folded header lines
     header = header.replace( /\r\n\s+/g, ' ' )
     // String -> Array of lines
