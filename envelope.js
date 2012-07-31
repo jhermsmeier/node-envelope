@@ -10,13 +10,12 @@ function Envelope( mail ) {
   if( !(this instanceof Envelope) )
     return new Envelope( mail )
   
-  var boundary
-  
   if( !Buffer.isBuffer( mail ) )
     mail = new Buffer( mail )
   
-  boundary = new Buffer( "\r\n\r\n" )
-  boundary = buffer.indexOf( boundary, mail )
+  var boundary = buffer.indexOf(
+    new Buffer( "\r\n\r\n" ), mail
+  )
   
   this.parseHeader( mail.slice( 0, boundary ) )
   this.parseBody( mail.slice( boundary ) )
