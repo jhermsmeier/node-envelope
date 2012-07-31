@@ -107,9 +107,9 @@ Envelope.prototype = {
     }
     
     var slug, key, value
-    var k, swap, pattern
+    var i, k, swap, pattern
     
-    for( var i = 0; i < slug_count; i++ ) {
+    for( i = 0; i < slug_count; i++ ) {
       
       slug    = slugs[i]
       pattern = new RegExp( '^' + slug + '_' )
