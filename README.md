@@ -25,7 +25,7 @@ console.log( email )
 
 Example Output:
 
-```
+```js
 {
   received: [
     'by 10.216.232.26 with SMTP id m26csp10350weq; Mon, 30 Jul 2012 07:44:49 -0700 (PDT)',
