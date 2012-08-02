@@ -1,6 +1,74 @@
 # Envelope
 
-## License (MIT)
+Envelope translates raw emails into objects.
+
+## Install with [npm](https://npmjs.org)
+
+```sh
+$ npm install envelope
+```
+
+## Usage
+
+```javascript
+var fs = require( 'fs' )
+var Envelope = require( 'envelope' )
+
+// Read email into a buffer
+var data = fs.readFileSync( './test.eml' )
+
+// Construct envelope
+var email = new Envelope( data )
+
+console.log( email )
+```
+
+Example Output:
+
+```
+{
+  received: [
+    'by 10.216.232.26 with SMTP id m26csp10350weq; Mon, 30 Jul 2012 07:44:49 -0700 (PDT)',
+    'by 10.216.183.140 with SMTP id q12mr5294522wem.58.1343659483851; Mon, 30 Jul 2012 07:44:43-0700 (PDT)'
+  ],
+  delivered_to: 'myself@example.tld',
+  return_path: '<someone@example.tld>',
+  message_id: '<900030350169DCB@example.tld>',
+  date: 'Mon, 30 Jul 2012 16:44:27 +0200',
+  subject: 'Sample Subject',
+  to: {
+    address: 'myself@example.tld',
+    name: 'Jonas Hermsmeier'
+  },
+  from: {
+    address: 'someone@example.tld',
+    name: 'Some One'
+  },
+  mime_version: '1.0',
+  content_type: {
+    mime: 'multipart/alternative',
+    boundary: '030300090403080807050803'
+  }
+  '0': {
+    content_transfer_encoding: 'quoted-printable',
+    content_type: {
+      mime: 'text/plain',
+      charset: 'ISO-8859-15'
+    },
+    body: 'Hello World!'
+  },
+}
+```
+
+## API
+
+### new Envelope( *buffer* )
+Contructs a new envelope object from a buffer.
+
+### Envelope.parse( *buffer* )
+Same as `new Envelope()`
+
+# License (MIT)
 
 Copyright (c) 2012 [Jonas Hermsmeier](http://jhermsmeier.de)
 
