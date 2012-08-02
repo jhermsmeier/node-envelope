@@ -2,11 +2,13 @@
 
 Envelope translates raw emails into objects.
 
+
 ## Install with [npm](https://npmjs.org)
 
 ```sh
 $ npm install envelope
 ```
+
 
 ## Usage
 
@@ -60,6 +62,7 @@ Example Output:
 }
 ```
 
+
 ## API
 
 ### new Envelope( *buffer* )
@@ -68,7 +71,8 @@ Contructs a new envelope object from a buffer.
 ### Envelope.parse( *buffer* )
 Same as `new Envelope()`
 
-# License (MIT)
+
+## License (MIT)
 
 Copyright (c) 2012 [Jonas Hermsmeier](http://jhermsmeier.de)
 
