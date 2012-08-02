@@ -17,6 +17,8 @@ function Envelope( mail ) {
     new Buffer( "\r\n\r\n" ), mail
   )
   
+  console.log( boundary )
+  
   this.parseHeader( mail.slice( 0, boundary ) )
   this.parseBody( mail.slice( boundary ) )
   
@@ -35,7 +37,7 @@ Envelope.parse = function( mail ) {
 Envelope.prototype = {
   
   /**
-   * @param  {String|Buffer} header
+   * @param  {Buffer} header
    * @return {Object} 
    */
   parseHeader: function( header ) {
@@ -138,12 +140,42 @@ Envelope.prototype = {
   },
   
   /**
-   * @param  {String|Buffer} body
+   * @param  {Buffer} body
    * @return {Object}
    */
   parseBody: function( body ) {
     
+    body = body.toString()
     
+    var boundary = this.content_type.boundary
+    var bounds   = []
+    var index    = -1
+    
+    if( boundary ) {
+      
+      var start = '--' + boundary + '\r\n'
+      var end   = '--' + boundary + '--'
+      
+      index = body.indexOf( start )
+      
+      while( ~index ) {
+        bounds.push( index )
+        index += start.length
+        index  = body.indexOf( start, index )
+      }
+      
+      var b = start.length
+      var c = bounds.length
+      var i = 0
+      
+      for( ; i < c; i++ ) {
+        this[i] = body.slice( bounds[i] + b, bounds[ i + 1 ] )
+        this[i] = new Envelope( this[i] )
+      }
+      
+    } else {
+      this.body = body.trim()
+    }
     
     return this
     
