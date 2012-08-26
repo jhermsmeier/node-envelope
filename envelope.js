@@ -105,8 +105,18 @@ Envelope.prototype = {
       var i = 0
       
       for( ; i < c; i++ ) {
+        
         this[i] = body.slice( bounds[i] + b, bounds[ i + 1 ] )
         this[i] = new Envelope( this[i] )
+        
+        // Automatically create a buffer from
+        // non-text base64 encoded data
+        if( !( /^text/.test( this[i].content_type[''] ) ) ) {
+          if( this[i].content_transfer_encoding === 'base64' ) {
+            this[i].body = new Buffer( this[i].body, 'base64' )
+          }
+        }
+        
       }
       
     } else {
