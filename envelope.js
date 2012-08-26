@@ -1,4 +1,5 @@
 
+var mime = require( 'mime-lib' )
 var buffer = require( './lib/buffer' )
 
 /**
@@ -113,12 +114,21 @@ Envelope.prototype = {
       
       this.body = body.trim()
       
+      var isText = this.content_type && /^text/.test( this.content_type[''] )
+      
       // Automatically create a buffer from
       // non-text base64 encoded data
-      if( this.content_type && !/^text/.test( this.content_type[''] ) ) {
-        if( this.content_transfer_encoding === 'base64' ) {
-          this.body = new Buffer( this.body, 'base64' )
-        }
+      if( !isText && this.content_transfer_encoding === 'base64' ) {
+        this.body = new Buffer( this.body, 'base64' )
+      }
+      
+      // Automatically decode text from either
+      // base64 or quoted-printable encoding
+      if( isText ) {
+        if( this.content_transfer_encoding === 'quoted-printable' )
+          this.body = mime.decodeQP( this.body )
+        if( this.content_transfer_encoding === 'base64' )
+          this.body = new Buffer( this.body, 'base64' ).toString()
       }
       
     }
