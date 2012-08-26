@@ -76,6 +76,48 @@ Envelope.prototype = {
   },
   
   /**
+   * @param  {Buffer} body
+   * @return {Object}
+   */
+  parseBody: function( body ) {
+    
+    body = body.toString()
+    
+    var boundary = this.content_type.boundary
+    var bounds   = []
+    var index    = -1
+    
+    if( boundary ) {
+      
+      var start = '--' + boundary + '\r\n'
+      var end   = '--' + boundary + '--'
+      
+      index = body.indexOf( start )
+      
+      while( ~index ) {
+        bounds.push( index )
+        index += start.length
+        index  = body.indexOf( start, index )
+      }
+      
+      var b = start.length
+      var c = bounds.length
+      var i = 0
+      
+      for( ; i < c; i++ ) {
+        this[i] = body.slice( bounds[i] + b, bounds[ i + 1 ] )
+        this[i] = new Envelope( this[i] )
+      }
+      
+    } else {
+      this.body = body.trim()
+    }
+    
+    return this
+    
+  },
+  
+  /**
    * Branches out header fields under a given slug.
    * 
    * For example, if you have this in your `envelope.header`:
@@ -134,48 +176,6 @@ Envelope.prototype = {
     return slug_count > 1
       ? object
       : swap
-    
-  },
-  
-  /**
-   * @param  {Buffer} body
-   * @return {Object}
-   */
-  parseBody: function( body ) {
-    
-    body = body.toString()
-    
-    var boundary = this.content_type.boundary
-    var bounds   = []
-    var index    = -1
-    
-    if( boundary ) {
-      
-      var start = '--' + boundary + '\r\n'
-      var end   = '--' + boundary + '--'
-      
-      index = body.indexOf( start )
-      
-      while( ~index ) {
-        bounds.push( index )
-        index += start.length
-        index  = body.indexOf( start, index )
-      }
-      
-      var b = start.length
-      var c = bounds.length
-      var i = 0
-      
-      for( ; i < c; i++ ) {
-        this[i] = body.slice( bounds[i] + b, bounds[ i + 1 ] )
-        this[i] = new Envelope( this[i] )
-      }
-      
-    } else {
-      this.body = body.trim()
-    }
-    
-    return this
     
   }
   
