@@ -84,7 +84,7 @@ Envelope.prototype = {
     
     body = body.toString()
     
-    var boundary = this.content_type.boundary
+    var boundary = this.content_type && this.content_type.boundary
     var bounds   = []
     var index    = -1
     
