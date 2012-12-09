@@ -1,11 +1,11 @@
 {
   
   "name": "envelope",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "description": "Parse raw emails into structured objects",
   "kewords": [
-    
+    "email", "mail"
   ],
   
   "author": {
