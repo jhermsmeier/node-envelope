@@ -18,6 +18,10 @@ function Envelope( mail ) {
     new Buffer( "\r\n\r\n" ), mail
   )
   
+  boundary = !~boundary
+    ? mail.length - 1
+    : boundary
+  
   this.parseHeader( mail.slice( 0, boundary ) )
   this.parseBody( mail.slice( boundary ) )
   
