@@ -1,4 +1,5 @@
-# Envelope
+
+# Envelope [![build status](https://secure.travis-ci.org/jhermsmeier/node-envelope.png)](http://travis-ci.org/jhermsmeier/node-envelope)
 
 Envelope translates raw emails into objects.
 
