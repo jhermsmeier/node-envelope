@@ -16,6 +16,10 @@
   
   "main": "envelope.js",
   
+  "scripts": {
+    "test": "node test/"
+  },
+  
   "dependencies": {
     "mime-lib": ""
   },
