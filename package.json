@@ -1,7 +1,7 @@
 {
   
   "name": "envelope",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "description": "Parse raw emails into structured objects",
   "kewords": [
@@ -21,7 +21,8 @@
   },
   
   "dependencies": {
-    "mime-lib": ""
+    "mime-lib": "",
+    "dkim": ""
   },
   
   "repository": {
