@@ -6,7 +6,11 @@ var tests = fs.readdirSync( __dirname )
 
 tests.forEach( function( path ) {
   if( path === 'index.js' ) { return }
-  new envelope(
+  console.log( '---------------------------------------------------------------' )
+  console.log( path )
+  console.log( '---------------------------------------------------------------' )
+  var e = new envelope(
     fs.readFileSync( __dirname + '/' + path )
   )
+  console.log( e )
 })
