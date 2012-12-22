@@ -3,9 +3,9 @@
   "name": "envelope",
   "version": "0.0.5",
   "license": "MIT",
-  "description": "Parse raw emails into structured objects",
+  "description": "Mail becomes Object",
   "kewords": [
-    "email", "mail"
+    "email", "mail", "message"
   ],
   
   "author": {
