@@ -139,68 +139,6 @@ Envelope.prototype = {
     
     return this
     
-  },
-  
-  /**
-   * Branches out header fields under a given slug.
-   * 
-   * For example, if you have this in your `envelope.header`:
-   * 
-   *     'list_archive': 'https://github.com/...',
-   *     'list_unsubscribe': '<mailto:unsub...@reply.github.com>',
-   *     'list_id': '<...github.com>',
-   * 
-   * Then you can transform your envelope.header with
-   * `envelope.header.branch( 'list' )` to:
-   * 
-   *     'list': {
-   *        'archive': 'https://github.com/...',
-   *        'unsubscribe': '<mailto:unsub...@reply.github.com>',
-   *        'id': '<...github.com>'
-   *      }
-   * 
-   * @param  {Array}   slugs
-   * @param  {Boolean} [modify = false]
-   * @return {Object}  header
-   */
-  branchHeader: function( slugs, modify ) {
-    
-    var slug_count = slugs.length
-    var object     = {}
-    
-    if( slug_count === 0 ) {
-      return object
-    }
-    
-    var slug, key, value
-    var i, k, swap, pattern
-    
-    for( i = 0; i < slug_count; i++ ) {
-      
-      slug    = slugs[i]
-      pattern = new RegExp( '^' + slug + '_' )
-      swap    = {}
-      k       = 0
-      
-      for( key in this ) {
-        if( pattern.test( key ) ) {
-          swap[ key.replace( patter, '' ) ] = this[ key ]
-          delete this[ key ]
-          k++
-        }
-      }
-      
-      if( k !== 0 ) {
-        if( modify ) this[ slug ] = swap
-        object[ slug ] = swap
-      }
-      
-    }
-    
-    return slug_count > 1
-      ? object
-      : swap
-    
   }
   
 }
