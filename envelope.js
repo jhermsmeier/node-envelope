@@ -27,7 +27,7 @@ function Envelope( mail ) {
     body:   mail.slice( boundary )
   }
   
-  this.header = this.parseHeader( this.original.header )
+  this.header = Envelope.parseHeader( this.original.header )
   this.parseBody( this.original.body )
   
 }
@@ -39,49 +39,49 @@ Envelope.parse = function( mail ) {
 }
 
 /**
+ * @param  {Buffer} header
+ * @return {Object} 
+ */
+Envelope.parseHeader = function( header ) {
+  
+  // Buffer -> String
+  header = header.toString()
+  // Unfold folded header lines
+  header = header.replace( /\r\n\s+/g, ' ' )
+  
+  // String -> Array of lines
+  var lines = header.split( '\r\n' )
+  // Splits line up into a key/value pair
+  var pattern = /^([^:]*?)[:]\s*?([^\s].*)/
+  var field, key, value, header = {}
+  
+  // Convert each line
+  for ( i = 0; i < lines.length; i++ ) {
+    // Split line up into a key/value pair
+    field = pattern.exec( lines[i] )
+    // Make the key js-dot-notation accessible
+    key   = field[1].toLowerCase().replace( /[^a-z0-9]/gi, '_' )
+    value = Envelope.filter( key, field[2].trim() )
+    // Store value under it's key
+    if ( header[ key ] && header[ key ].push ) {
+      header[ key ].push( value )
+    } else if ( header[ key ] ) {
+      header[ key ] = [ header[ key ], value ]
+    } else {
+      header[ key ] = value
+    }
+    
+  }
+  
+  return header
+  
+}
+
+/**
  * Envelope prototype
  * @type {Object}
  */
 Envelope.prototype = {
-  
-  /**
-   * @param  {Buffer} header
-   * @return {Object} 
-   */
-  parseHeader: function( header ) {
-    
-    // Buffer -> String
-    header = header.toString()
-    // Unfold folded header lines
-    header = header.replace( /\r\n\s+/g, ' ' )
-    
-    // String -> Array of lines
-    var lines = header.split( '\r\n' )
-    // Splits line up into a key/value pair
-    var pattern = /^([^:]*?)[:]\s*?([^\s].*)/
-    var field, key, value, header = {}
-    
-    // Convert each line
-    for ( i = 0; i < lines.length; i++ ) {
-      // Split line up into a key/value pair
-      field = pattern.exec( lines[i] )
-      // Make the key js-dot-notation accessible
-      key   = field[1].toLowerCase().replace( /[^a-z0-9]/gi, '_' )
-      value = Envelope.filter( key, field[2].trim() )
-      // Store value under it's key
-      if ( header[ key ] && header[ key ].push ) {
-        header[ key ].push( value )
-      } else if ( header[ key ] ) {
-        header[ key ] = [ header[ key ], value ]
-      } else {
-        header[ key ] = value
-      }
-      
-    }
-    
-    return header
-    
-  },
   
   /**
    * @param  {Buffer} body
