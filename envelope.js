@@ -56,7 +56,7 @@ Envelope.parseHeader = function( header ) {
   var field, key, value, header = {}
   
   // Convert each line
-  for ( i = 0; i < lines.length; i++ ) {
+  for( var i = 0; i < lines.length; i++ ) {
     // Split line up into a key/value pair
     if( field = pattern.exec( lines[i] ) ) {
       // Make the key js-dot-notation accessible
