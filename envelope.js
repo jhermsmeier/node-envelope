@@ -99,7 +99,7 @@ Envelope.prototype = {
     body = body.toString()
       
     var header   = this.header
-    var boundary = header.content_type && header.content_type.boundary
+    var boundary = header.contentType && header.contentType.boundary
     var bounds   = []
     var index    = -1
     
@@ -126,22 +126,22 @@ Envelope.prototype = {
       
     } else {
       
-      var isText = header.content_type && /^text/.test( header.content_type.mime )
+      var isText = header.contentType && /^text/.test( header.contentType.mime )
       
       this[0] = body.trim()
       
       // Automatically create a buffer from
       // non-text base64 encoded data
-      if( !isText && header.content_transfer_encoding === 'base64' ) {
+      if( !isText && header.contentTransferEncoding === 'base64' ) {
         this[0] = new Buffer( this[0], 'base64' )
       }
       
       // Automatically decode text from either
       // base64 or quoted-printable encoding
       if( isText ) {
-        if( header.content_transfer_encoding === 'quoted-printable' )
+        if( header.contentTransferEncoding === 'quoted-printable' )
           this[0] = mime.decodeQP( this[0] )
-        if( header.content_transfer_encoding === 'base64' )
+        if( header.contentTransferEncoding === 'base64' )
           this[0] = new Buffer( this[0], 'base64' ).toString()
       }
       
