@@ -22,8 +22,13 @@ function Envelope( mail ) {
     ? mail.length - 1
     : boundary
   
-  this.parseHeader( mail.slice( 0, boundary ) )
-  this.parseBody( mail.slice( boundary ) )
+  this.original = {
+    header: mail.slice( 0, boundary ),
+    body:   mail.slice( boundary )
+  }
+  
+  this.header = this.parseHeader( this.original.header )
+  this.parseBody( this.original.body )
   
 }
 
@@ -85,8 +90,9 @@ Envelope.prototype = {
   parseBody: function( body ) {
     
     body = body.toString()
-    
-    var boundary = this.content_type && this.content_type.boundary
+      
+    var header   = this.header
+    var boundary = header.content_type && header.content_type.boundary
     var bounds   = []
     var index    = -1
     
@@ -114,23 +120,23 @@ Envelope.prototype = {
       
     } else {
       
-      this.body = body.trim()
+      var isText = header.content_type && /^text/.test( header.content_type.mime )
       
-      var isText = this.content_type && /^text/.test( this.content_type[''] )
+      this[0] = body.trim()
       
       // Automatically create a buffer from
       // non-text base64 encoded data
-      if( !isText && this.content_transfer_encoding === 'base64' ) {
-        this.body = new Buffer( this.body, 'base64' )
+      if( !isText && header.content_transfer_encoding === 'base64' ) {
+        this[0] = new Buffer( this[0], 'base64' )
       }
       
       // Automatically decode text from either
       // base64 or quoted-printable encoding
       if( isText ) {
-        if( this.content_transfer_encoding === 'quoted-printable' )
-          this.body = mime.decodeQP( this.body )
-        if( this.content_transfer_encoding === 'base64' )
-          this.body = new Buffer( this.body, 'base64' ).toString()
+        if( header.content_transfer_encoding === 'quoted-printable' )
+          this[0] = mime.decodeQP( this[0] )
+        if( header.content_transfer_encoding === 'base64' )
+          this[0] = new Buffer( this[0], 'base64' ).toString()
       }
       
     }
