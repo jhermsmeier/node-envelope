@@ -40,7 +40,7 @@ Example Output:
       'by 10.194.78.162 with SMTP id c2mr28698959wjx.46.1356191346691; Sat, 22 Dec 2012 07:49:06 -0800 (PST)',
       'by 10.194.64.229 with HTTP; Sat, 22 Dec 2012 07:49:06 -0800 (PST)'
     ],
-    dkim_signature: {
+    dkimSignature: {
       version: '1',
       algorithm: 'rsa-sha256',
       canonical: 'relaxed/relaxed',
@@ -50,9 +50,9 @@ Example Output:
       hash: 'DrlXO8ocnosZnW5ZN7P4S/fIdR8vwHj0TyzoPISZF2Q=',
       signature: 'gOHBExs2JcJFRrozPDw88Js0dc0AHOo6YTZqrDTedfcK/jM/mxfu5rfVzuUnKAGiS5ZvRvXvwYjIW0B9t0DDHDOs5soIukuEXeUw9OV2QD8qc5pmOShuRQWyW5pRftTF87omkjgV2Eik5K2f8FpNlyvuLDjMUmyP8RpLaRrii6+kRRsoJzzP41IqALmlLmJfvtnkeu5kM0v4XnQ4hBNcaLuCmq3fZfCQFDexofECQOZ8FWE0VfdASG8HOJ6jgxuKwYtNfy11ySUSrIwFFlrjTfiNqSD9nzQns3j+xXLtqsvviJQXJgkC8O6mLel3GDwm8LHzBoszzqZ/FiL4rgVdfw=='
     },
-    mime_version: '1.0',
+    mimeVersion: '1.0',
     date: 'Sat, 22 Dec 2012 16:49:06 +0100',
-    message_id: '<CA+0p7-rrsAij-6nzDgk3R62ZHRZrjdJvOjxhCsHQ+m=nERwCJA@mail.gmail.com>',
+    messageId: '<CA+0p7-rrsAij-6nzDgk3R62ZHRZrjdJvOjxhCsHQ+m=nERwCJA@mail.gmail.com>',
     subject: 'AGAIN',
     from: {
       address: 'jhermsmeier@gmail.com',
@@ -62,7 +62,7 @@ Example Output:
       address: 'me@jhermsmeier.de',
       name: null
     },
-    content_type: {
+    contentType: {
       mime: 'multipart/alternative',
       boundary: '047d7bfd046e778e8d04d172e7cb'
     }
@@ -74,7 +74,7 @@ Example Output:
       body: <Buffer 0d 0a 0d 0a 48 45 4c 4f 0d 0a 0d 0a>
     },
     header: {
-      content_type: {
+      contentType: {
         mime: 'text/plain',
         charset: 'UTF-8'
       }
@@ -87,7 +87,7 @@ Example Output:
       body: <Buffer 0d 0a 0d 0a 3c 64 69 76 20 64 69 72 3d 5c 22 6c 74 72 5c 22 3e 48 45 4c 4f 3c 2f 64 69 76 3e 0d 0a 0d 0a 2d 2d 30 34 37 64 37 62 66 64 30 34 36 65 37 37...>
     },
     header: {
-      content_type: {
+      contentType: {
         mime: 'text/html',
         charset: 'UTF-8'
       }
