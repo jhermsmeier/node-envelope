@@ -49,34 +49,32 @@ Envelope.prototype = {
     header = header.toString()
     // Unfold folded header lines
     header = header.replace( /\r\n\s+/g, ' ' )
-    // String -> Array of lines
-    header = header.split( '\r\n' )
     
+    // String -> Array of lines
+    var lines = header.split( '\r\n' )
     // Splits line up into a key/value pair
     var pattern = /^([^:]*?)[:]\s*?([^\s].*)/
-    // Header line count
-    var lines = header.length
-    var field, key, value
+    var field, key, value, header = {}
     
     // Convert each line
-    for ( i = 0; i < lines; i++ ) {
+    for ( i = 0; i < lines.length; i++ ) {
       // Split line up into a key/value pair
-      field = pattern.exec( header[i] )
+      field = pattern.exec( lines[i] )
       // Make the key js-dot-notation accessible
       key   = field[1].toLowerCase().replace( /[^a-z0-9]/gi, '_' )
       value = Envelope.filter( key, field[2].trim() )
       // Store value under it's key
-      if ( this[ key ] && this[ key ].push ) {
-        this[ key ].push( value )
-      } else if ( this[ key ] ) {
-        this[ key ] = [ this[ key ], value ]
+      if ( header[ key ] && header[ key ].push ) {
+        header[ key ].push( value )
+      } else if ( header[ key ] ) {
+        header[ key ] = [ header[ key ], value ]
       } else {
-        this[ key ] = value
+        header[ key ] = value
       }
       
     }
     
-    return this
+    return header
     
   },
   
