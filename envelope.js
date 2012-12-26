@@ -18,9 +18,10 @@ function Envelope( mail ) {
     new Buffer( "\r\n\r\n" ), mail
   )
   
-  boundary = !~boundary
-    ? mail.length - 1
-    : boundary
+  if( !~boundary ) {
+    boundary = mail.length - 1
+    boundary = boundary < 0 ? 0 : boundary
+  }
   
   this.original = {
     header: mail.slice( 0, boundary ),
@@ -58,19 +59,19 @@ Envelope.parseHeader = function( header ) {
   // Convert each line
   for ( i = 0; i < lines.length; i++ ) {
     // Split line up into a key/value pair
-    field = pattern.exec( lines[i] )
-    // Make the key js-dot-notation accessible
-    key   = field[1].toLowerCase().replace( /[^a-z0-9]/gi, '_' )
-    value = Envelope.filter( key, field[2].trim() )
-    // Store value under it's key
-    if ( header[ key ] && header[ key ].push ) {
-      header[ key ].push( value )
-    } else if ( header[ key ] ) {
-      header[ key ] = [ header[ key ], value ]
-    } else {
-      header[ key ] = value
+    if( field = pattern.exec( lines[i] ) ) {
+      // Make the key js-dot-notation accessible
+      key   = field[1].toLowerCase().replace( /[^a-z0-9]/gi, '_' )
+      value = Envelope.filter( key, field[2].trim() )
+      // Store value under it's key
+      if ( header[ key ] && header[ key ].push ) {
+        header[ key ].push( value )
+      } else if ( header[ key ] ) {
+        header[ key ] = [ header[ key ], value ]
+      } else {
+        header[ key ] = value
+      }
     }
-    
   }
   
   return header
@@ -111,10 +112,9 @@ Envelope.prototype = {
       
       var b = start.length
       var c = bounds.length
-      var i = 0
       
-      for( ; i < c; i++ ) {
-        this[i] = body.slice( bounds[i] + b, bounds[ i + 1 ] )
+      for( var i = 0; i < c; i++ ) {
+        this[i] = body.slice( bounds[i] + b, bounds[ i + 1 ] || void 0 )
         this[i] = new Envelope( this[i] )
       }
       
