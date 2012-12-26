@@ -19,7 +19,6 @@ function Envelope( mail ) {
   )
   
   if( !~boundary ) {
-    boundary = mail.length - 1
     boundary = boundary < 0 ? 0 : boundary
   }
   
