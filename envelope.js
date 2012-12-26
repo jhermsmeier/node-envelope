@@ -59,8 +59,15 @@ Envelope.parseHeader = function( header ) {
   for( var i = 0; i < lines.length; i++ ) {
     // Split line up into a key/value pair
     if( field = pattern.exec( lines[i] ) ) {
-      // Make the key js-dot-notation accessible
-      key   = field[1].toLowerCase().replace( /[^a-z0-9]/gi, '_' )
+      // Make the key js-dot-notation accessible (to camelCase)
+      key = field[1].toLowerCase()
+        .split( /[^a-z0-9]/gi )
+        .map( function( word, i ) {
+          if( i === 0 ) return word
+          word = word.split( '' )
+          word[0] = word[0].toUpperCase()
+          return word.join( '' )
+        }).join( '' )
       value = Envelope.filter( key, field[2].trim() )
       // Store value under it's key
       if ( header[ key ] && header[ key ].push ) {
