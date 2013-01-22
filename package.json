@@ -1,7 +1,7 @@
 {
   
   "name": "envelope",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "license": "MIT",
   "description": "Mail >> Object",
   "kewords": [
@@ -21,8 +21,7 @@
   },
   
   "dependencies": {
-    "mime-lib": "",
-    "dkim": ""
+    "mime-lib": ""
   },
   
   "repository": {

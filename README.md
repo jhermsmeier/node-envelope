@@ -40,16 +40,6 @@ Example Output:
       'by 10.194.78.162 with SMTP id c2mr28698959wjx.46.1356191346691; Sat, 22 Dec 2012 07:49:06 -0800 (PST)',
       'by 10.194.64.229 with HTTP; Sat, 22 Dec 2012 07:49:06 -0800 (PST)'
     ],
-    dkimSignature: {
-      version: '1',
-      algorithm: 'rsa-sha256',
-      canonical: 'relaxed/relaxed',
-      domain: 'gmail.com',
-      selector: '20120113',
-      headers: ['mime-version', 'date', 'message-id', 'subject', 'from', 'to', 'content-type'],
-      hash: 'DrlXO8ocnosZnW5ZN7P4S/fIdR8vwHj0TyzoPISZF2Q=',
-      signature: 'gOHBExs2JcJFRrozPDw88Js0dc0AHOo6YTZqrDTedfcK/jM/mxfu5rfVzuUnKAGiS5ZvRvXvwYjIW0B9t0DDHDOs5soIukuEXeUw9OV2QD8qc5pmOShuRQWyW5pRftTF87omkjgV2Eik5K2f8FpNlyvuLDjMUmyP8RpLaRrii6+kRRsoJzzP41IqALmlLmJfvtnkeu5kM0v4XnQ4hBNcaLuCmq3fZfCQFDexofECQOZ8FWE0VfdASG8HOJ6jgxuKwYtNfy11ySUSrIwFFlrjTfiNqSD9nzQns3j+xXLtqsvviJQXJgkC8O6mLel3GDwm8LHzBoszzqZ/FiL4rgVdfw=='
-    },
     mimeVersion: '1.0',
     date: 'Sat, 22 Dec 2012 16:49:06 +0100',
     messageId: '<CA+0p7-rrsAij-6nzDgk3R62ZHRZrjdJvOjxhCsHQ+m=nERwCJA@mail.gmail.com>',
