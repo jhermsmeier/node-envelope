@@ -1,12 +1,10 @@
 {
   
   "name": "envelope",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "license": "MIT",
   "description": "Mail >> Object",
-  "kewords": [
-    "email", "mail", "message"
-  ],
+  "kewords": "email, mail, message",
   
   "author": {
     "name": "Jonas Hermsmeier",
@@ -21,7 +19,8 @@
   },
   
   "dependencies": {
-    "mime-lib": ""
+    "mime-lib": "",
+    "codes": ""
   },
   
   "repository": {
