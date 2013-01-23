@@ -10,6 +10,13 @@ Envelope parses emails quite liberally into an object structure which makes it e
 $ npm install envelope
 ```
 
+## Features
+
+- Parses almost everything. If it doesn't: file an issue
+- Decodes MIME words, base64, ...
+- Automatically converts to UTF8 w/ iconv (codes)
+- Converts attachments to buffers
+
 
 ## Usage
 
