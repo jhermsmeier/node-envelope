@@ -51,12 +51,19 @@ function Body( header, body, envelope ) {
         this[0] = new Buffer( this[0], 'base64' ).toString()
     }
     
+    // Try to convert to UTF8, if it's not UTF8 yet
     var charset = header.contentType &&
       header.contentType.charset
     
     if( charset ) {
       try { this[0] = iconv.decode( this[0], charset ) }
       catch( e ) { /* unsupported by iconv */ }
+    }
+    
+    // Convert this part to an Envelope,
+    // if this part appears to be an attached message
+    if( header.contentType && header.contentType.mime === 'message/rfc822' ) {
+      this[0] = require('../envelope')( this[0] )
     }
     
   }
