@@ -4,9 +4,8 @@ var iconv = require( 'codes' )
 
 function Body( header, body, envelope ) {
   
-  var boundary = header.contentType && header.contentType.boundary
-  var bounds   = []
-  var index    = -1
+  var boundary = header.contentType &&
+    header.contentType.boundary
   
   if( boundary ) {
     
@@ -22,7 +21,7 @@ function Body( header, body, envelope ) {
       for( var i = 0; i < parts.length; i++ ) {
         this[i] = require('../envelope')( parts[i] )
       }
-    
+      
     } else {
       boundary = null
     }
