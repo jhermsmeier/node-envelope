@@ -1,4 +1,6 @@
 
+var mime = require( 'mime-lib' )
+
 /**
  * Runs a filter on header field.
  * @param  {String} key
