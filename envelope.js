@@ -1,7 +1,4 @@
 
-var mime = require( 'mime-lib' )
-// var buffer = require( './lib/buffer' )
-
 /**
  * Envelope
  * @param {String|Buffer} mail
