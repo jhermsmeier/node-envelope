@@ -1,7 +1,7 @@
 
 # Envelope [![build status](https://secure.travis-ci.org/jhermsmeier/node-envelope.png)](http://travis-ci.org/jhermsmeier/node-envelope)
 
-Envelope translates raw emails into objects.
+Envelope parses emails quite liberally into an object structure which makes it easy to work with.
 
 
 ## Install with [npm](https://npmjs.org)
@@ -12,6 +12,8 @@ $ npm install envelope
 
 
 ## Usage
+
+### Parsing an email
 
 ```javascript
 var fs = require( 'fs' )
@@ -30,16 +32,13 @@ Example Output:
 
 ```js
 {
-  original: {
-    header: <Buffer 52 65 63 65 69 76 65 64 3a 20 62 79 20 6d 61 69 6c 2d 77 69 30 2d 66 31 37 35 2e 67 6f 6f 67 6c 65 2e 63 6f 6d 20 77 69 74 68 20 53 4d 54 50 20 69 64 20...>,
-    body: <Buffer 0d 0a 0d 0a 2d 2d 30 34 37 64 37 62 66 64 30 34 36 65 37 37 38 65 38 64 30 34 64 31 37 32 65 37 63 62 0d 0a 43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 74...>
-  },
   header: {
     received: [
       'by mail-wi0-f175.google.com with SMTP id hm11so5717280wib.2 for <me@jhermsmeier.de>; Sat, 22 Dec 2012 07:49:06 -0800 (PST)',
       'by 10.194.78.162 with SMTP id c2mr28698959wjx.46.1356191346691; Sat, 22 Dec 2012 07:49:06 -0800 (PST)',
       'by 10.194.64.229 with HTTP; Sat, 22 Dec 2012 07:49:06 -0800 (PST)'
     ],
+    dkimSignature: 'v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20120113; h=mime-version:date:message-id:subject:from:to:content-type; bh=DrlXO8ocnosZnW5ZN7P4S/fIdR8vwHj0TyzoPISZF2Q=; b=gOHBExs2JcJFRrozPDw88Js0dc0AHOo6YTZqrDTedfcK/jM/mxfu5rfVzuUnKAGiS5 ZvRvXvwYjIW0B9t0DDHDOs5soIukuEXeUw9OV2QD8qc5pmOShuRQWyW5pRftTF87omkj gV2Eik5K2f8FpNlyvuLDjMUmyP8RpLaRrii6+kRRsoJzzP41IqALmlLmJfvtnkeu5kM0 v4XnQ4hBNcaLuCmq3fZfCQFDexofECQOZ8FWE0VfdASG8HOJ6jgxuKwYtNfy11ySUSrI wFFlrjTfiNqSD9nzQns3j+xXLtqsvviJQXJgkC8O6mLel3GDwm8LHzBoszzqZ/FiL4rg Vdfw==',
     mimeVersion: '1.0',
     date: 'Sat, 22 Dec 2012 16:49:06 +0100',
     messageId: '<CA+0p7-rrsAij-6nzDgk3R62ZHRZrjdJvOjxhCsHQ+m=nERwCJA@mail.gmail.com>',
@@ -59,10 +58,6 @@ Example Output:
   },
   '0': {
     '0': 'HELO',
-    original: {
-      header: <Buffer 43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 74 65 78 74 2f 70 6c 61 69 6e 3b 20 63 68 61 72 73 65 74 3d 55 54 46 2d 38>,
-      body: <Buffer 0d 0a 0d 0a 48 45 4c 4f 0d 0a 0d 0a>
-    },
     header: {
       contentType: {
         mime: 'text/plain',
@@ -71,11 +66,7 @@ Example Output:
     }
   },
   '1': {
-    '0': '<div dir=\\"ltr\\">HELO</div>\r\n\r\n--047d7bfd046e778e8d04d172e7cb--',
-    original: {
-      header: <Buffer 43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 74 65 78 74 2f 68 74 6d 6c 3b 20 63 68 61 72 73 65 74 3d 55 54 46 2d 38>,
-      body: <Buffer 0d 0a 0d 0a 3c 64 69 76 20 64 69 72 3d 5c 22 6c 74 72 5c 22 3e 48 45 4c 4f 3c 2f 64 69 76 3e 0d 0a 0d 0a 2d 2d 30 34 37 64 37 62 66 64 30 34 36 65 37 37...>
-    },
+    '0': '<div dir=\\"ltr\\">HELO</div>',
     header: {
       contentType: {
         mime: 'text/html',
@@ -86,15 +77,29 @@ Example Output:
 }
 ```
 
+### Using filters
+
+#### Transforming header field values
+
+You can easily add your own transformation functions to Envelope.
+To transform a specific header field value, just make sure the field identifiers are written in camelCase:
+
+```javascript
+Envelope.Header.filter.add(
+  'dkimSignature', function dkim( value ) {
+    // ...
+    return newValue
+  }
+)
+```
+
+If you want to apply your transformation to a set of header fields, simply use an array of field names, e.g. instead of `'contentType'` use `[ 'contentType', 'contentDisposition' ]`.
+
 
 ## API
 
 ### new Envelope( *buffer* )
 Contructs a new envelope object from a buffer.
-
-### Envelope.parse( *buffer* )
-Same as `new Envelope()`
-
 
 ## License (MIT)
 
