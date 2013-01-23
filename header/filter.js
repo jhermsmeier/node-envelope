@@ -21,6 +21,7 @@ function filter( key, value ) {
  * @type {Object}
  */
 filter.map = {
+  _subject: [ 'subject' ],
   _address: [ 'from', 'replyTo', 'to', 'cc', 'bcc', 'sender', 'returnPath' ],
   _content: [ 'contentType', 'contentDisposition' ]
 }
@@ -60,7 +61,10 @@ filter.add = function( fields, fn, slot ) {
  */
 filter.fn = {
   _address: require( './filters/address' ),
-  _content: require( './filters/content' )
+  _content: require( './filters/content' ),
+  _subject: function( input ) {
+    return mime.decodeWord( input )
+  }
 }
 
 module.exports = filter
