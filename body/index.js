@@ -1,6 +1,6 @@
 
 var mime = require( 'mime-lib' )
-var iconv = require( 'codes' )
+var Iconv = require( 'iconv' ).Iconv
 
 function Body( header, body, envelope ) {
   
@@ -55,7 +55,7 @@ function Body( header, body, envelope ) {
       header.contentType.charset
     
     if( charset ) {
-      try { this[0] = iconv.decode( this[0], charset ) }
+      try { this[0] = new Iconv( charset, 'UTF8//TRANSLIT//IGNORE' ).convert( this[0] ).toString() }
       catch( e ) { /* unsupported by iconv */ }
     }
     
