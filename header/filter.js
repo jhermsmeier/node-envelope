@@ -23,9 +23,12 @@ function filter( key, value ) {
  * @type {Object}
  */
 filter.map = {
-  _subject: [ 'subject' ],
-  _address: [ 'from', 'replyTo', 'to', 'cc', 'bcc', 'sender', 'returnPath' ],
-  _content: [ 'contentType', 'contentDisposition' ]
+  // Internal filter to decode QP encoded
+  // header field values
+  _MIMEWords: [ '_MIMEWords' ],
+  // Public filters
+  address: [ 'from', 'replyTo', 'to', 'cc', 'bcc', 'sender', 'returnPath' ],
+  content: [ 'contentType', 'contentDisposition' ]
 }
 
 /**
@@ -62,11 +65,15 @@ filter.add = function( fields, fn, slot ) {
  * @type {Object}
  */
 filter.fn = {
-  _address: require( './filters/address' ),
-  _content: require( './filters/content' ),
-  _subject: function( input ) {
-    return mime.decodeWord( input )
-  }
+  
+  _MIMEWords: function( input ) {
+    try { return mime.decodeWord( input ) }
+    catch( error ) { return input }
+  },
+  
+  address: require( './filters/address' ),
+  content: require( './filters/content' )
+  
 }
 
 module.exports = filter

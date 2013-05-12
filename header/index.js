@@ -25,8 +25,10 @@ function Header( header ) {
           return chr.toUpperCase()
         }
       )
+      // Decode MIME words and/or QP encoded values
+      value = Header.filter( '_MIMEWords', field[2].trim() )
       // Apply matched filters to the field value
-      value = Header.filter( key, field[2].trim() )
+      value = Header.filter( key, value )
       // Store value under it's key
       if ( this[ key ] && this[ key ].push ) {
         this[ key ].push( value )
