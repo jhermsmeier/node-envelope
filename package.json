@@ -1,7 +1,7 @@
 {
   
   "name": "envelope",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "license": "MIT",
   "description": "Mail >> Object",
   "kewords": "email, mail, message",
@@ -19,7 +19,7 @@
   },
   
   "dependencies": {
-    "mime-lib": "",
+    "mime-lib": "0.0.3-alpha",
     "iconv": "~2.0.6"
   },
   
