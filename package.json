@@ -1,26 +1,29 @@
 {
   
   "name": "envelope",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "Mail >> Object",
   "kewords": "email, mail, message",
   
   "author": {
     "name": "Jonas Hermsmeier",
-    "email": "jhermsmeier@googlemail.com",
-    "url": "http://jhermsmeier.de"
+    "email": "jhermsmeier@gmail.com",
+    "url": "https://jhermsmeier.de"
   },
   
-  "main": "envelope.js",
+  "main": "envelope",
   
   "scripts": {
     "test": "node test/"
   },
   
   "dependencies": {
-    "mime-lib": "0.0.3-alpha",
-    "iconv": "~2.0.6"
+    "mime-lib": ""
+  },
+  
+  "devDependencies": {
+    "mocha": ""
   },
   
   "repository": {
