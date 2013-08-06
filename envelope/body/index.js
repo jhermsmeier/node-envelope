@@ -7,6 +7,7 @@ function Body() {
     return new Body()
   
   this._buffer = new Buffer( 0 )
+  this._envelope = null
   
   // Make "private" properties non-enumerable
   Object.keys( this ).map( function( key ) {
@@ -17,8 +18,6 @@ function Body() {
   }.bind( this ))
   
 }
-
-Body.Part = require( './part' )
 
 // Exports
 module.exports = Body
@@ -40,8 +39,15 @@ Body.prototype = {
     }
     
     this._buffer = buffer
+    this._envelope = envelope
     
+    var header = envelope && envelope.header
+    var boundary = header && header.contentType &&
+      header.contentType.boundary
     
+    boundary ?
+      this._split( boundary ) :
+      this[0] = buffer
     
     return this
     
