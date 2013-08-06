@@ -28,7 +28,7 @@ module.exports = transform
 transform.map = {
   address:    [ 'from', 'replyTo', 'to', 'cc', 'bcc', 'sender', 'returnPath', 'deliveredTo' ],
   content:    [ 'contentType', 'contentDisposition' ],
-  received:   [ 'received' ],
+  received:   [ 'received', 'xReceived' ],
   references: [ 'references' ],
   date:       [ 'date' ],
 }
@@ -44,11 +44,24 @@ transform.fn = {
   },
   
   received: function( input ) {
+    
     var parts = input.split( ';' )
-    return {
+    var info = {
       time: new Date( parts.pop().trim() ),
-      id: parts.join( ';' )
+      raw: parts.join( ';' )
     }
+    
+    // Parse out each key/value pair
+    // (from, by, with, id, for)
+    info.raw.replace(
+      /(from|by|with|id|for)\s([^\s]+)((?:\s([(][^\)]+[)]))+)?/ig,
+      function( match, key, value ) {
+        info[ key ] = value
+      }
+    )
+    
+    return info
+    
   },
   
   references: function( input ) {
