@@ -15,7 +15,7 @@
   "main": "envelope",
   
   "scripts": {
-    "test": "node test/"
+    "test": "mocha"
   },
   
   "dependencies": {
