@@ -23,6 +23,8 @@ function Header() {
 // Exports
 module.exports = Header
 
+Header.transform = require( './transform' )
+
 /**
  * Makes the key js-dot-notation accessible (to camelCase)
  * @param  {String} key
