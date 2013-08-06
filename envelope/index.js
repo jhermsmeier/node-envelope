@@ -8,7 +8,7 @@ function Envelope( options ) {
   
   this._buffer = new Buffer( 0 )
   
-  this.version = require( '../package' ).version
+  // this.version = require( '../package' ).version
   
   this.header = new Envelope.Header()
   this.body = new Envelope.Body()
@@ -95,7 +95,7 @@ Envelope.prototype = {
     }
     
     // Parse rest as the body
-    this.body.parse( buffer.slice( boundary ) )
+    this.body.parse( buffer.slice( boundary + 4 ), this )
     
     return this
     
