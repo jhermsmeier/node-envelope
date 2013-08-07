@@ -106,7 +106,11 @@ Envelope.prototype = {
   },
   
   toString: function() {
-    
+    const CRLF = '\r\n'
+    return [
+      this.header.toString(),
+      this.body.toString()
+    ].join( CRLF + CRLF )
   }
   
 }
