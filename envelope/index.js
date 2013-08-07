@@ -68,6 +68,10 @@ Envelope.prototype = {
   
   constructor: Envelope,
   
+  getHeader: function( name ) {
+    return this.header.get( name )
+  },
+  
   setHeader: function( name, value, properties ) {
     this.header.set( name, value, properties )
     return this
