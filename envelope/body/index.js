@@ -87,7 +87,7 @@ Body.prototype = {
     var start = this._indexOf( startBound )
     var end   = this._lastIndexOf( endBound )
     
-    if( ~ start ) {
+    if( ~start ) {
       
       var i = 0, index, indices = []
       var body = this._buffer.slice(
@@ -105,7 +105,7 @@ Body.prototype = {
       }
       
     } else {
-      this[0] = buffer
+      this[0] = this._buffer
     }
     
     return this
@@ -136,6 +136,8 @@ Body.prototype = {
   },
   
   toString: function() {
+    
+    return ''
     
   }
   
