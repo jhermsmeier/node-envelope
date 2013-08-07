@@ -24,6 +24,7 @@ function Header() {
 module.exports = Header
 
 Header.transform = require( './transform' )
+Header.format = require( './format' )
 
 /**
  * Makes the key js-dot-notation accessible (to camelCase)
@@ -144,6 +145,32 @@ Header.prototype = {
   },
   
   toString: function() {
+    
+    const CRLF = '\r\n'
+    
+    var self = this
+    var fields = []
+    
+    function add( key, value ) {
+      
+      var line = mime.foldLine(
+        Header.toDashedCase( key ) + ': ' +
+        Header.format( key, value )
+      )
+      
+      fields.push( line )
+      
+    }
+    
+    Object.keys( this ).forEach(
+      function( k ) {
+        Array.isArray( self[k] ) ?
+          self[k].map( add.bind( null, k ) ) :
+          add( k, self[k] )
+      }
+    )
+    
+    return fields.join( CRLF )
     
   }
   
