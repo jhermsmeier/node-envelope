@@ -80,9 +80,7 @@ Envelope.prototype = {
   parse: function( buffer ) {
     
     if( !Buffer.isBuffer( buffer ) ) {
-      throw new TypeError(
-        'First argument needs to be a buffer.'
-      )
+      throw new TypeError( 'First argument needs to be a buffer.' )
     }
     
     this._buffer = buffer

@@ -84,6 +84,10 @@ Body.prototype = {
     var startBound = '--' + boundary + '\r\n'
     var endBound = '--' + boundary + '--'
     
+    // TODO: If no boundary is found, even though
+    // a boundary is given or contentType is multipart;
+    // try to detect a boundary by educated guesses
+    // (look for "--XXXX\r\n" and/or "--XXXXX--\r\n")
     var start = this._indexOf( startBound )
     var end   = this._lastIndexOf( endBound )
     
@@ -94,7 +98,7 @@ Body.prototype = {
         start + startBound.length, end
       )
       
-      while( ~ (index = this._indexOf( startBound, index + 1 )) ) {
+      while( ~( index = this._indexOf( startBound, index + 1 ) ) ) {
         indices.push( index )
       }
       
@@ -115,9 +119,7 @@ Body.prototype = {
   parse: function( buffer, envelope ) {
     
     if( !Buffer.isBuffer( buffer ) ) {
-      throw new TypeError(
-        'First argument needs to be a buffer.'
-      )
+      throw new TypeError( 'First argument needs to be a buffer.' )
     }
     
     this._buffer = buffer
