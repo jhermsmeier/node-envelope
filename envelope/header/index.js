@@ -120,6 +120,25 @@ Header.prototype = {
     
   },
   
+  extract: function( buffer ) {
+    
+    if( !Buffer.isBuffer( buffer ) ) {
+      throw new TypeError( 'First argument needs to be a buffer.' )
+    }
+    
+    // Search for the first occurrence of <CR><LF><CR><LF>,
+    // which marks the end of the mail header
+    // <CR> = 0x0D; <LF> = 0x0A
+    var boundary, len = buffer.length - 4
+    for( boundary = 0; boundary < len; boundary++ ) {
+      if( buffer.readUInt32BE( boundary ) === 0x0D0A0D0A ) {
+        return this.parse( buffer.slice( 0, boundary ) )
+        break
+      }
+    }
+    
+  },
+  
   parse: function( buffer ) {
     
     if( !Buffer.isBuffer( buffer ) ) {

@@ -54,7 +54,7 @@ Envelope.parse = function( buffer, options ) {
  */
 Envelope.parseHeader = function( buffer, options ) {
   return new Envelope.Header( options )
-    .parse( buffer )
+    .extract( buffer )
 }
 
 // Exports
@@ -85,19 +85,14 @@ Envelope.prototype = {
     
     this._buffer = buffer
     
-    // Search for the first occurrence of <CR><LF><CR><LF>,
-    // which marks the end of the mail header
-    // <CR> = 0x0D; <LF> = 0x0A
-    var boundary, len = buffer.length - 4
-    for( boundary = 0; boundary < len; boundary++ ) {
-      if( buffer.readUInt32BE( boundary ) === 0x0D0A0D0A ) {
-        this.header.parse( buffer.slice( 0, boundary ) )
-        break
-      }
-    }
+    // Extract the header
+    this.header.extract( buffer )
     
     // Parse rest as the body
-    this.body.parse( buffer.slice( boundary + 4 ), this )
+    this.body.parse(
+      buffer.slice( this.header._buffer.length + 4 ),
+      this
+    )
     
     return this
     
