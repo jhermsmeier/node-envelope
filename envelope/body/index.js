@@ -135,7 +135,7 @@ Body.prototype = {
     
   },
   
-  toString: function() {
+  toString: function( encoding ) {
     
     return ''
     

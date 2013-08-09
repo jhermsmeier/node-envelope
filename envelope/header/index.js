@@ -144,7 +144,7 @@ Header.prototype = {
     
   },
   
-  toString: function() {
+  toString: function( encoding ) {
     
     const CRLF = '\r\n'
     
@@ -170,7 +170,8 @@ Header.prototype = {
       }
     )
     
-    return fields.join( CRLF )
+    return fields.join( CRLF ) +
+      CRLF + CRLF
     
   }
   
