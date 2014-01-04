@@ -19,8 +19,8 @@
   },
   
   "dependencies": {
-    "mime-lib": "0.0.3-alpha",
-    "iconv": "~2.0.6"
+    "mime-lib": "~0.1.0",
+    "iconv": "~2.0.7"
   },
   
   "repository": {
