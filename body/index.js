@@ -41,20 +41,20 @@ function Body( header, body, envelope ) {
       this[0] = new Buffer( this[0], 'base64' )
     }
     
-    // Automatically decode text from either
-    // base64 or quoted-printable encoding
-    if( isText ) {
-      if( header.contentTransferEncoding === 'quoted-printable' )
-        this[0] = mime.decodeQP( this[0] )
-      if( header.contentTransferEncoding === 'base64' )
-        this[0] = new Buffer( this[0], 'base64' ).toString()
-    }
-    
     // Try to convert to UTF8, if it's not UTF8 yet
     var charset = header.contentType &&
       header.contentType.charset
     
-    if( charset ) {
+    // Automatically decode text from either
+    // base64 or quoted-printable encoding
+    if( isText ) {
+      if( header.contentTransferEncoding === 'quoted-printable' )
+        this[0] = mime.decodeQP( this[0], charset )
+      if( header.contentTransferEncoding === 'base64' )
+        this[0] = new Buffer( this[0], 'base64' ).toString()
+    }
+    
+    if( !isText && charset ) {
       try { this[0] = new Iconv( charset, 'UTF8//TRANSLIT//IGNORE' ).convert( this[0] ).toString() }
       catch( e ) { /* unsupported by iconv */ }
     }
