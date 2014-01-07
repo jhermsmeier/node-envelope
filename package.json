@@ -4,7 +4,7 @@
   "version": "0.2.0",
   "license": "MIT",
   "description": "Mail >> Object",
-  "kewords": "email, mail, message",
+  "keywords": "email, mail, message",
   
   "author": {
     "name": "Jonas Hermsmeier",
