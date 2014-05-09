@@ -8,18 +8,8 @@ function Envelope( options ) {
   
   this._buffer = new Buffer( 0 )
   
-  // this.version = require( '../package' ).version
-  
   this.header = new Envelope.Header()
   this.body = new Envelope.Body()
-  
-  // Make "private" properties non-enumerable
-  Object.keys( this ).map( function( key ) {
-    key[0] === '_' ? Object.defineProperty( this, key, {
-      value: this[ key ], writable: true,
-      configurable: true, enumerable: false,
-    }) : null
-  }.bind( this ))
   
 }
 

@@ -10,14 +10,6 @@ function Header() {
   
   this._buffer = new Buffer( 0 )
   
-  // Make "private" properties non-enumerable
-  Object.keys( this ).map( function( key ) {
-    key[0] === '_' ? Object.defineProperty( this, key, {
-      value: this[ key ], writable: true,
-      configurable: true, enumerable: false,
-    }) : null
-  }.bind( this ))
-  
 }
 
 // Exports
