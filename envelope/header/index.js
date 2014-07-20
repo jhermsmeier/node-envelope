@@ -1,187 +1,168 @@
 var mime = require( 'mime-lib' )
 
 /**
- * Envelope.Header constructor
+ * Envelope Header Constructor
+ * @return {Header}
  */
 function Header() {
   
   if( !(this instanceof Header) )
     return new Header()
   
-  this._buffer = new Buffer( 0 )
+  this.raw = []
   
 }
 
 // Exports
 module.exports = Header
 
-Header.transform = require( './transform' )
-Header.format = require( './format' )
-
-/**
- * Makes the key js-dot-notation accessible (to camelCase)
- * @param  {String} key
- * @return {String} 
- */
-Header.toCamelCase = function( key ) {
-  return key.toLowerCase().replace(
-    /-([^-])/ig, function( match, chr ) {
-      return chr.toUpperCase()
-    }
-  )
-}
-
 /**
  * Turns a camelCase header field key
  * back into it's valid email header form
- * @param  {String} key
+ * @param  {String} value
  * @return {String} 
  */
-Header.toDashedCase = function( key ) {
-  return key.replace( /[A-Z]/g, function( match ) {
+function toDashCase( value ) {
+  
+  if( /-([^-])/ig.test( value ) )
+    value = ( value + '' ).toLowerCase()
+  
+  return value.replace( /[A-Z]/g, function( match ) {
     return '-' + match
   }).replace( /^./, function( match ) {
     return match.toUpperCase()
   })
+  
+}
+
+Header.EOD = new Buffer( '\r\n\r\n' )
+
+/**
+ * Formats a field value for toString()
+ * @param  {String} key
+ * @param  {Mixed}  value
+ * @return {String}
+ */
+Header.format = require( './format' )
+
+/**
+ * Transforms a field into an
+ * object representation
+ * @type {Mixed}
+ */
+Header.transform = require( './transform' )
+
+Header.parse = function( value ) {
+  return new Header().parse( value )
+}
+
+function logtime( time ) {
+  var ms = Math.round( (time[1] * 10e-7)*1000 )/1000 + ( time[0] / 1000 )
+  return ( ms.toString() + ' ms' )
 }
 
 /**
- * Header prototype
+ * Envelope Header prototype
  * @type {Object}
  */
 Header.prototype = {
   
   constructor: Header,
   
-  /**
-   * Retrieves a given header field
-   * @param  {String} key
-   * @return {Mixed}  value
-   */
-  get: function( key ) {
-    key = this.camelCase( key )
-    return this[ key ]
-  },
-  
-  /**
-   * Sets a header field to the given value
-   * @param  {String}  key
-   * @param  {String}  value
-   * @param  {Object}  properties
-   * @param  {Boolean} overwrite
-   * @return {Header}
-   */
-  set: function( key, value, properties, overwrite ) {
+  get: function( field ) {
     
-    key = Header.toCamelCase( key )
+    field = ( field + '' ).toLowerCase()
     
-    value = mime.decodeWord( value.trim() )
-    value = Header.transform( key, value )
+    var i, len = this.raw.length
+    var value, result = []
     
-    if( overwrite === true ) {
-      this[ key ] = value
-    } else if( this[ key ] && this[ key ].push ) {
-      this[ key ].push( value )
-    } else if( this[ key ] ) {
-      this[ key ] = [ this[ key ], value ]
-    } else {
-      this[ key ] = value
-    }
-    
-    return this
-    
-  },
-  
-  /**
-   * Parses a header field
-   * @param  {String} line
-   * @param  {Boolean} overwrite
-   * @return {Header}
-   */
-  parseField: function( line, overwrite ) {
-    
-    // Splits line up into a key/value pair
-    var pattern = /^([^:]*?)[:]\s*?([^\s].*)/
-    var field, key, value
-    
-    if( field = pattern.exec( line ) ) {
-      this.set( field[1], field[2], null, overwrite )
-    }
-    
-    return this
-    
-  },
-  
-  extract: function( buffer ) {
-    
-    if( !Buffer.isBuffer( buffer ) ) {
-      throw new TypeError( 'First argument needs to be a buffer.' )
-    }
-    
-    // Search for the first occurrence of <CR><LF><CR><LF>,
-    // which marks the end of the mail header
-    // <CR> = 0x0D; <LF> = 0x0A
-    var boundary, len = buffer.length - 4
-    for( boundary = 0; boundary < len; boundary++ ) {
-      if( buffer.readUInt32BE( boundary ) === 0x0D0A0D0A ) {
-        return this.parse( buffer.slice( 0, boundary ) )
-        break
+    for( i = 0; i < len; i += 2 ) {
+      if( this.raw[i] === field ) {
+        value = Header.transform( field, this.raw[ i + 1 ] )
+        result.push( value )
       }
     }
     
+    return result.length > 1 ?
+      result : result[0]
+    
   },
   
-  parse: function( buffer ) {
+  set: function( field, value ) {
     
-    if( !Buffer.isBuffer( buffer ) ) {
-      throw new TypeError( 'First argument needs to be a buffer.' )
-    }
+    field = field.toLowerCase()
     
-    this._buffer = buffer
+    if( typeof value !== 'string' )
+      value = Header.format( field, value )
     
-    // We should be able to safely convert our
-    // header buffer to a UTF8 string
-    buffer.toString()
-      // Unfold folded header lines
-      .replace( /\r\n\s+/g, ' ' )
-      // String -> Array of lines
-      .split( '\r\n' )
-      // Parse each field line
-      .forEach( this.parseField.bind( this ) )
+    // Convert field name to camelCase and
+    // make sure it's a string
+    this.raw.push(
+      field, mime.decodeWord( value )
+    )
     
     return this
     
   },
   
-  toString: function( encoding ) {
+  // Clear a header field...
+  clear: function( field ) {
+    field = ( field + '' ).toLowerCase()
+    this[ field ] = null
+    delete this[ field ]
+    return this
+  },
+  
+  parse: function( value ) {
+    
+    // Make sure we have a string at hand
+    var lines = ( value + '' )
+      // Unfold folded header lines
+      .replace( /\r\n\s+/g, ' ' )
+      // String -> Array of lines
+      .split( /\r\n/g )
+    
+    // Splits line up into a key/value pair
+    for( var i = 0; i < lines.length; i++ ) {
+      var sep = lines[i].indexOf( ':' )
+      this.set(
+        lines[i].substr( 0, sep ),
+        lines[i].substr( sep + 1 ).trim()
+      )
+    }
+    
+    return this
+    
+  },
+  
+  toJSON: function() {
+    return JSON.stringify( this, null, 2 )
+  },
+  
+  toString: function() {
     
     const CRLF = '\r\n'
     
     var self = this
     var fields = []
     
-    function add( key, value ) {
-      
-      var line = mime.foldLine(
-        Header.toDashedCase( key ) + ': ' +
-        Header.format( key, value )
-      )
-      
-      fields.push( line )
-      
-    }
-    
     Object.keys( this ).forEach(
-      function( k ) {
-        Array.isArray( self[k] ) ?
-          self[k].map( add.bind( null, k ) ) :
-          add( k, self[k] )
+      function( key ) {
+        
+        var value = self[ key ]
+        var line = mime.foldLine(
+          toDashCase( key ) + ': ' +
+          Header.format( key, value )
+        )
+        
+        fields.push( line )
+        
       }
     )
     
     return fields.join( CRLF ) +
       CRLF + CRLF
     
-  }
+  },
   
 }

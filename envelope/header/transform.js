@@ -10,7 +10,7 @@ function transform( key, value ) {
   
   for( var i in transform.map ) {
     if( ~transform.map[i].indexOf( key ) )
-      return transform.fn[i]( value )
+      return transform.fn[i]( value + '' )
   }
   
   return value
@@ -26,9 +26,9 @@ module.exports = transform
  * @type {Object}
  */
 transform.map = {
-  address:    [ 'from', 'replyTo', 'to', 'cc', 'bcc', 'sender', 'returnPath', 'deliveredTo' ],
-  content:    [ 'contentType', 'contentDisposition' ],
-  received:   [ 'received', 'xReceived' ],
+  address:    [ 'from', 'reply-to', 'to', 'cc', 'bcc', 'sender', 'return-path', 'delivered-to' ],
+  content:    [ 'content-type', 'content-disposition' ],
+  received:   [ 'received', 'x-received' ],
   references: [ 'references' ],
   date:       [ 'date' ],
 }
@@ -47,18 +47,25 @@ transform.fn = {
     
     var parts = input.split( ';' )
     var info = {
-      time: new Date( parts.pop().trim() ),
-      raw: parts.join( ';' )
+      time: new Date( parts.pop().trim() )
     }
     
-    // Parse out each key/value pair
-    // (from, by, with, id, for)
-    info.raw.replace(
-      /(from|by|with|id|for)\s([^\s]+)((?:\s([(][^\)]+[)]))+)?/ig,
-      function( match, key, value ) {
-        info[ key ] = value
-      }
-    )
+    input = parts.join( ';' )
+    
+    ;[ 'from', 'by', 'with', 'id', 'for' ]
+      .forEach( function( key, i, a ) {
+        
+        var remainder = a.slice( i + 1 ).join( '|' )
+        var pattern = ( i < a.length - 1 ) ?
+          '('+key+')(.+?)(('+remainder+')|$)' :
+          '('+key+')(.+?)$'
+        
+        var match = new RegExp( pattern, 'i' ).exec( input )
+        if( match ) {
+          info[ key ] = match[2].trim()
+        }
+        
+      })
     
     return info
     
@@ -79,7 +86,8 @@ transform.fn = {
     
     // Run over multiple addresses
     if( ~input.indexOf( ',' ) )
-      return input.split( ',' ).map( address )
+      return input.split( ',' )
+        .map( this.address )
     
     // Address formats
     var patterns = [
@@ -101,13 +109,18 @@ transform.fn = {
     ]
     
     var pattern, fmt, i, m
+    var trim = function( value ) {
+      return value != null ?
+        ( value || '' ).trim() :
+        null
+    }
     
     for( fmt in patterns ) {
       i = patterns[ fmt ]
       if( m = i[0].exec( input ) ) {
         input = {
-          address: m[ i[1] ] || null,
-          name: m[ i[2] ] || null
+          address: trim( m[ i[1] ] ),
+          name: trim( m[ i[2] ] )
         }
         break
       }
@@ -133,21 +146,19 @@ transform.fn = {
    */
   content: function( input ) {
     
-    var pattern = /^(.*?)([=](['"]?)(.*)\3)?$/
-    var i, m, object = {}
+    var pattern = /^([^=]*?)([=](['"]?)([^\3]*)\3)?$/
+    var object = {}
     
     input = input.split( /;\s*/g )
     object.mime = input.shift()
     
-    for( i in input ) {
+    var i, m, len = input.length
+    
+    for( i = 0; i < len; i++ ) {
       if( m = pattern.exec( input[i] ) ) {
         if( m[4] ) {
-          m[1] = m[1].toLowerCase().replace(
-            /-([^-])/ig, function( m, chr ) {
-              return chr.toUpperCase()
-            }
-          )
-          object[ m[1] ] = mime.decodeWord( m[4] )
+          object[ m[1].toLowerCase() ] =
+            mime.decodeWord( m[4] )
         }
       }
     }

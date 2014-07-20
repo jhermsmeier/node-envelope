@@ -45,24 +45,29 @@ format.fn = {
   
   received: function( input ) {
     
-    var info = [ 'from', 'by', 'with', 'id', 'for' ]
-      .reduce( function( str, key ) {
+    return [].concat( input )
+      .map( function( input ) {
         
-        if( input[ key ] ) {
-          str = [ str, key, input[ key ] ].join( ' ' )
-          str = str.trim()
-        }
+        var info = [ 'from', 'by', 'with', 'id', 'for' ]
+          .reduce( function( str, key ) {
+            
+            if( input[ key ] ) {
+              str = [ str, key, input[ key ] ].join( ' ' )
+              str = str.trim()
+            }
+            
+            return str
+            
+          }, '')
         
-        return str
+        var time = new Date( input.time )
+          .toUTCString()
         
-      }, '')
-    
-    var time = new Date( input.time )
-      .toUTCString()
-    
-    return input.time ?
-      info+'; '+time :
-      info
+        return input.time ?
+          info+'; '+time :
+          info
+        
+      }).join( '\n' )
     
   },
   
@@ -72,15 +77,20 @@ format.fn = {
   
   address: function( input ) {
     
-    if( input.name && input.address ) {
-      return input.name + ' <' + input.address + '>'
-    } else if( input.name ) {
-      return input.name
-    } else if( input.address ) {
-      return '<' + input.address + '>'
-    } else {
-      return ''
-    }
+    return [].concat( input )
+      .map( function( input ) {
+        if( input.name && input.address ) {
+          return input.name + ' <' + input.address + '>'
+        } else if( input.name ) {
+          return input.name
+        } else if( input.address ) {
+          return '<' + input.address + '>'
+        } else if( typeof input === 'string' ) {
+          return input
+        } else {
+          return ''
+        }
+      }).join( ', ' )
     
   },
   
