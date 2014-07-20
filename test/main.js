@@ -1,9 +1,10 @@
-console.log( require( '../' ) )
-console.log( '' )
-console.log( new (require( '../' )) )
+var assert = require( 'assert' )
+var Envelope = require( '../' )
 
-module.exports = {
-  'Envelope': {
-    
-  }
-}
+describe( 'Envelope', function() {
+  
+  it( 'constructor', function() {
+    assert( new Envelope() instanceof Envelope )
+  })
+  
+})
