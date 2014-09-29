@@ -1,5 +1,8 @@
 
-# Envelope [![build status](https://secure.travis-ci.org/jhermsmeier/node-envelope.png)](http://travis-ci.org/jhermsmeier/node-envelope) [![NPM version](https://badge.fury.io/js/envelope.png)](https://npmjs.org/envelope)
+# Envelope
+[![build status](http://img.shields.io/travis/envelope.svg?style=flat)](http://travis-ci.org/jhermsmeier/node-envelope)
+[![npm](http://img.shields.io/npm/v/envelope.svg?style=flat)](https://npmjs.org/envelope)
+![downloads](http://img.shields.io/npm/dm/envelope.svg?style=flat)
 
 Envelope parses emails quite liberally into an object structure which makes it easy to work with.
 
