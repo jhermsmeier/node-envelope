@@ -1,6 +1,6 @@
 
 # Envelope
-[![build status](http://img.shields.io/travis/jhermsmeier/envelope.svg?style=flat)](http://travis-ci.org/jhermsmeier/node-envelope)
+[![build status](http://img.shields.io/travis/jhermsmeier/node-envelope.svg?style=flat)](http://travis-ci.org/jhermsmeier/node-envelope)
 [![npm](http://img.shields.io/npm/v/envelope.svg?style=flat)](https://npmjs.org/envelope)
 ![downloads](http://img.shields.io/npm/dm/envelope.svg?style=flat)
 
