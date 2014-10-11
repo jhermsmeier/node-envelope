@@ -3,12 +3,12 @@
   "version": "0.2.0",
   "license": "MIT",
   "description": "Mail >> Object",
-  "keywords": "email, mail, message",
-  "author": {
-    "name": "Jonas Hermsmeier",
-    "email": "jhermsmeier@gmail.com",
-    "url": "https://jhermsmeier.de"
-  },
+  "keywords": [
+    "email",
+    "mail",
+    "message"
+  ],
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
   "main": "lib/envelope",
   "scripts": {
     "test": "mocha"
@@ -25,5 +25,9 @@
   },
   "bugs": {
     "url": "https://github.com/jhermsmeier/node-envelope/issues"
+  },
+  "homepage": "https://github.com/jhermsmeier/node-envelope",
+  "directories": {
+    "test": "test"
   }
 }
