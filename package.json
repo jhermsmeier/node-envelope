@@ -9,7 +9,7 @@
     "email": "jhermsmeier@gmail.com",
     "url": "https://jhermsmeier.de"
   },
-  "main": "envelope",
+  "main": "lib/envelope",
   "scripts": {
     "test": "mocha"
   },
