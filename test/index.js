@@ -3,7 +3,7 @@ if( 'describe' in global ) return
 var fs = require( 'fs' )
 var path = require( 'path' )
 var util = require( 'util' )
-var Envelope = require( '../envelope/index.js' )
+var Envelope = require( '../' )
 
 function log( value ) {
   console.log( util.inspect( value, {
