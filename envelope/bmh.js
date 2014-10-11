@@ -1,18 +1,16 @@
-var assert = require( 'assert' )
-
 /**
  * BoyerMooreHorspool constructor
  * @param {Buffer} haystack
  */
 function BoyerMooreHorspool( haystack ) {
   
-  assert( haystack, 'Haystack must be a buffer' )
+  if( !Buffer.isBuffer( haystack ) )
+    throw new TypeError( 'Haystack must be a buffer' )
   
   if( !(this instanceof BoyerMooreHorspool) )
     return new BoyerMooreHorspool( haystack )
   
-  this.haystack = Buffer.isBuffer( haystack ) ?
-    haystack : new Buffer( haystack )
+  this.haystack = haystack
   
 }
 
@@ -26,8 +24,8 @@ BoyerMooreHorspool.prototype = {
   
   indexOf: function( needle, start ) {
     
-    needle = Buffer.isBuffer( needle ) ?
-      needle : new Buffer( needle )
+    if( !Buffer.isBuffer( needle ) )
+      throw new TypeError( 'Needle must be a buffer' )
     
     var stack = this.haystack
     var nlen = needle.length
