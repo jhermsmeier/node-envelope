@@ -20,6 +20,11 @@ $ npm install envelope
 - Converts attachments to buffers
 
 
+## Performance
+
+On an Intel Core i5-3427U CPU @ 1.80GHz it processes about **20.1 MB per second**,
+which equals roughly **215.8 mails per second**.
+
 ## Usage
 
 ### Parsing an email
