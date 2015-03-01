@@ -1,4 +1,3 @@
-
 /**
  * Envelope
  * @param {String|Buffer} mail

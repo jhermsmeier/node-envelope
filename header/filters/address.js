@@ -1,4 +1,3 @@
-
 /**
  * Desperately tries to get a name
  * from a contact definition.

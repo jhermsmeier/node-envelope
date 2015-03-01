@@ -1,4 +1,3 @@
-
 var mime = require( 'mime-lib' )
 
 function Header( header ) {
