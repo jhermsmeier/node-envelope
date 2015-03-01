@@ -54,7 +54,7 @@ function Body( header, body, envelope ) {
     }
     
     if( !isText && charset ) {
-      if( iconv.encodingExists( charset ) ) {
+      if( Iconv.encodingExists( charset ) ) {
         this[0] = Iconv.decode( this[0], charset )
       }
     }
