@@ -30,6 +30,7 @@ function Body( header, body, envelope ) {
   if( !boundary ) {
     
     var isText = header.contentType &&
+      header.contentType.mime &&
       ~header.contentType.mime.indexOf( 'text' )
     
     this[0] = body.trim()
