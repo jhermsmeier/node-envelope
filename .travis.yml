@@ -1,7 +1,12 @@
 language: node_js
 node_js:
+  - "3"
+  - "2"
+  - "1"
+  - "0.12"
   - "0.10"
 branches:
   only:
     - master
+sudo: false
 script: npm test
