@@ -13,7 +13,7 @@
   "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de/)",
   "dependencies": {
     "iconv-lite": "~0.4.7",
-    "mime-lib": "~0.3.0"
+    "mime-lib": "^0.4.0"
   },
   "devDependencies": {},
   "scripts": {
