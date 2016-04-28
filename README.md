@@ -1,8 +1,8 @@
 # Envelope
-[![npm](http://img.shields.io/npm/v/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
-[![npm](http://img.shields.io/npm/l/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
-[![npm downloads](http://img.shields.io/npm/dm/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
-[![build status](http://img.shields.io/travis/jhermsmeier/node-envelope.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-envelope)
+[![npm](https://img.shields.io/npm/v/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
+[![npm](https://img.shields.io/npm/l/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
+[![npm downloads](https://img.shields.io/npm/dm/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
+[![build status](https://img.shields.io/travis/jhermsmeier/node-envelope.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-envelope)
 
 Envelope parses emails quite liberally into an object structure which makes it easy to work with.
 
@@ -107,7 +107,8 @@ Envelope.Header.filter.add(
 )
 ```
 
-If you want to apply your transformation to a set of header fields, simply use an array of field names, e.g. instead of `'contentType'` use `[ 'contentType', 'contentDisposition' ]`.
+If you want to apply your transformation to a set of header fields, simply use an array of field names,
+e.g. instead of `'contentType'` use `[ 'contentType', 'contentDisposition' ]`.
 
 
 ## API
