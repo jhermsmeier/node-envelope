@@ -9,7 +9,7 @@
     "mail",
     "message"
   ],
-  "main": "envelope",
+  "main": "lib/envelope.js",
   "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de/)",
   "dependencies": {
     "iconv-lite": "~0.4.13",
