@@ -1,30 +1,38 @@
 {
   "name": "envelope",
   "version": "1.0.4",
-  "description": "Mail >> Object",
+  "description": "Liberal email parser",
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
   "license": "MIT",
   "keywords": [
     "email",
+    "post",
+    "parse",
     "parser",
     "mail",
-    "message"
+    "message",
+    "mime"
   ],
   "main": "lib/envelope.js",
-  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de/)",
   "dependencies": {
     "iconv-lite": "~0.4.13",
     "mime-lib": "~0.5.0"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "node test/"
+  "devDependencies": {
+    "mocha": "~2.5.3"
   },
   "homepage": "https://github.com/jhermsmeier/node-envelope",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jhermsmeier/node-envelope.git"
+    "url": "git+https://github.com/jhermsmeier/node-envelope.git"
   },
   "bugs": {
     "url": "https://github.com/jhermsmeier/node-envelope/issues"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --ui tdd"
   }
 }
