@@ -1,6 +1,6 @@
 {
   "name": "envelope",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Liberal email parser",
   "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
   "license": "MIT",
@@ -16,10 +16,10 @@
   "main": "lib/envelope.js",
   "dependencies": {
     "iconv-lite": "~0.4.13",
-    "mime-lib": "~0.5.0"
+    "mime-lib": "~0.5.1"
   },
   "devDependencies": {
-    "mocha": "~2.5.3"
+    "mocha": "~3.1.0"
   },
   "homepage": "https://github.com/jhermsmeier/node-envelope",
   "repository": {
