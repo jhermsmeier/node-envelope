@@ -1,7 +1,7 @@
 # Envelope
-[![npm](https://img.shields.io/npm/v/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
-[![npm](https://img.shields.io/npm/l/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
-[![npm downloads](https://img.shields.io/npm/dm/envelope.svg?style=flat-square)](https://npmjs.com/envelope)
+[![npm](https://img.shields.io/npm/v/envelope.svg?style=flat-square)](https://npmjs.com/package/envelope)
+[![npm](https://img.shields.io/npm/l/envelope.svg?style=flat-square)](https://npmjs.com/package/envelope)
+[![npm downloads](https://img.shields.io/npm/dm/envelope.svg?style=flat-square)](https://npmjs.com/package/envelope)
 [![build status](https://img.shields.io/travis/jhermsmeier/node-envelope.svg?style=flat-square)](https://travis-ci.org/jhermsmeier/node-envelope)
 
 Envelope parses emails quite liberally into an object structure which makes it easy to work with.
@@ -9,7 +9,7 @@ Envelope parses emails quite liberally into an object structure which makes it e
 ## Install via [npm](https://npmjs.com)
 
 ```sh
-$ npm install envelope
+$ npm install --save envelope
 ```
 
 ## Features
