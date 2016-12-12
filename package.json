@@ -15,11 +15,11 @@
   ],
   "main": "lib/envelope.js",
   "dependencies": {
-    "iconv-lite": "~0.4.13",
+    "iconv-lite": "~0.4.15",
     "mime-lib": "~0.5.1"
   },
   "devDependencies": {
-    "mocha": "~3.1.0"
+    "mocha": "~3.2.0"
   },
   "homepage": "https://github.com/jhermsmeier/node-envelope",
   "repository": {
