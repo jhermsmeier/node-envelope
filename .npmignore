@@ -1,3 +1,4 @@
 .*
+*.md
+doc
 test
-benchmark
