@@ -19,7 +19,8 @@
     "mime-lib": "^0.5.1"
   },
   "devDependencies": {
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "nanobench": "^2.1.0"
   },
   "homepage": "https://github.com/jhermsmeier/node-envelope",
   "repository": {
@@ -29,10 +30,8 @@
   "bugs": {
     "url": "https://github.com/jhermsmeier/node-envelope/issues"
   },
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "mocha --ui tdd"
+    "test": "mocha --ui tdd",
+    "benchmark": "nanobench benchmark/*.js"
   }
 }
