@@ -2,6 +2,7 @@ var assert = require( 'assert' )
 var fs = require( 'fs' )
 var path = require( 'path' )
 var Envelope = require( '..' )
+var inspect = require( './inspect' )
 
 suite( 'Envelope', function() {
 
@@ -11,6 +12,7 @@ suite( 'Envelope', function() {
       var filename = path.join( __dirname, 'data', 'issues', '13.txt' )
       var data = fs.readFileSync( filename )
       var mail = new Envelope( data )
+      inspect.print( mail )
       assert.ok( mail['0']['0'].indexOf( '\r\n' ) >= 0 )
     })
 

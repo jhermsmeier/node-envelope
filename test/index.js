@@ -2,6 +2,7 @@ var assert = require( 'assert' )
 var fs = require( 'fs' )
 var path = require( 'path' )
 var Envelope = require( '..' )
+var inspect = require( './inspect' )
 
 suite( 'Envelope', function() {
 
@@ -24,6 +25,7 @@ suite( 'Envelope', function() {
       test( file.name, function() {
         var data = fs.readFileSync( file.path )
         var mail = new Envelope( data )
+        inspect.print( mail )
       })
     })
 
