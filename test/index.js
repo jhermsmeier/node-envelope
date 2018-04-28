@@ -24,6 +24,7 @@ suite( 'Envelope', function() {
       test( file.name, function() {
         var data = fs.readFileSync( file.path )
         var mail = new Envelope( data )
+        console.log( mail )
       })
     })
 
