@@ -16,7 +16,7 @@
   "main": "lib/envelope.js",
   "dependencies": {
     "iconv-lite": "^0.4.21",
-    "mime-lib": "^0.5.2"
+    "mime-lib": "^0.5.3"
   },
   "devDependencies": {
     "mocha": "^5.1.1",
