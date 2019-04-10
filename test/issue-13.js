@@ -11,7 +11,7 @@ describe( 'Issues', function() {
       var filename = path.join( __dirname, 'data', 'issues', '13.txt' )
       var data = fs.readFileSync( filename )
       var mail = new Envelope( data )
-      assert.ok( mail['0']['0'].indexOf( '\r\n' ) >= 0 )
+      assert.ok( mail['0'].body.indexOf( '\r\n' ) >= 0 )
     })
 
   })
