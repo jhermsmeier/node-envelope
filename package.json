@@ -31,7 +31,7 @@
     "url": "https://github.com/jhermsmeier/node-envelope/issues"
   },
   "scripts": {
-    "test": "mocha --ui tdd",
+    "test": "mocha",
     "benchmark": "nanobench benchmark/*.js"
   }
 }

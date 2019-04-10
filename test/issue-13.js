@@ -3,11 +3,11 @@ var fs = require( 'fs' )
 var path = require( 'path' )
 var Envelope = require( '..' )
 
-suite( 'Envelope', function() {
+describe( 'Issues', function() {
 
-  suite( 'Issue #13', function() {
+  context( '#13', function() {
 
-    test( 'should not remove newlines or linefeeds from qp encoded body', function() {
+    specify( 'should not remove newlines or linefeeds from qp encoded body', function() {
       var filename = path.join( __dirname, 'data', 'issues', '13.txt' )
       var data = fs.readFileSync( filename )
       var mail = new Envelope( data )

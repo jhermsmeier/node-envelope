@@ -3,9 +3,9 @@ var fs = require( 'fs' )
 var path = require( 'path' )
 var Envelope = require( '..' )
 
-suite( 'Envelope', function() {
+describe( 'Envelope', function() {
 
-  suite( '.parse()', function() {
+  context( '.parse()', function() {
 
     var ls = fs.readdirSync( path.join( __dirname, 'data' ) )
       .map( function( filename ) {
@@ -21,7 +21,7 @@ suite( 'Envelope', function() {
       })
 
     ls.forEach( function( file ) {
-      test( file.name, function() {
+      specify( file.name, function() {
         var data = fs.readFileSync( file.path )
         var mail = new Envelope( data )
         console.log( mail )
