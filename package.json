@@ -40,6 +40,7 @@
     "node": ">=8.0.0"
   },
   "scripts": {
+    "audit": "npm install --package-lock-only && npm audit; rm package-lock.json",
     "lint": "eslint .",
     "test": "nyc --clean mocha",
     "benchmark": "nanobench benchmark/*.js"
