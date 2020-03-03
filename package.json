@@ -20,11 +20,11 @@
   "dependencies": {
     "content-disposition": "^0.5.3",
     "content-type": "^1.0.4",
-    "iconv-lite": "^0.4.24"
+    "iconv-lite": "^0.5.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "mocha": "^5.1.1",
+    "mocha": "^5.2.0",
     "nanobench": "^2.1.1",
     "nyc": "^15.0.0"
   },
