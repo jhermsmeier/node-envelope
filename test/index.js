@@ -25,7 +25,7 @@ describe( 'Envelope', function() {
       ls.forEach( function( file ) {
         specify( `parses ${file.name}`, function() {
           var data = fs.readFileSync( file.path )
-          var mail = new Envelope( data )
+          /* var mail = */ new Envelope( data )
           // console.log( mail )
         })
       })
