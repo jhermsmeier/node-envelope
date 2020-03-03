@@ -18,10 +18,9 @@ emails.forEach( function( filename ) {
 
   bench( `${path.basename( filename )} ⨉ ${ITERATIONS}`, function( run ) {
     var buffer = fs.readFileSync( filename )
-    var email = null
     run.start()
     for( var i = 0; i < ITERATIONS; i++ ) {
-      email = new Envelope( buffer )
+      new Envelope( buffer )
     }
     run.end()
   })
