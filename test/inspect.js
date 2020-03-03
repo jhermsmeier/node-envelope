@@ -1,4 +1,4 @@
-var util = require( 'util' )
+const util = require( 'util' )
 
 function inspect( value ) {
   return util.inspect( value, inspect.options )

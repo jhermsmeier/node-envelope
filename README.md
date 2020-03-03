@@ -30,14 +30,14 @@ which equals roughly **215.8 mails per second**.
 ### Parsing an email
 
 ```javascript
-var fs = require( 'fs' )
-var Envelope = require( 'envelope' )
+const fs = require( 'fs' )
+const Envelope = require( 'envelope' )
 
 // Read email into a buffer
-var data = fs.readFileSync( './test.eml' )
+const data = fs.readFileSync( './test.eml' )
 
 // Construct envelope
-var email = new Envelope( data )
+const email = new Envelope( data )
 
 console.log( email )
 ```
@@ -114,4 +114,5 @@ e.g. instead of `'contentType'` use `[ 'contentType', 'contentDisposition' ]`.
 ## API
 
 ### new Envelope( *buffer* )
+
 Contructs a new envelope object from a buffer.

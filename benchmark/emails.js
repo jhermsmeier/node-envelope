@@ -1,13 +1,13 @@
-var bench = require( 'nanobench' )
-var fs = require( 'fs' )
-var path = require( 'path' )
-var Envelope = require( '..' )
+const bench = require( 'nanobench' )
+const fs = require( 'fs' )
+const path = require( 'path' )
+const Envelope = require( '..' )
 
-var ITERATIONS = 1000
+const ITERATIONS = 1000
 
-var dirname = path.join( __dirname, '..', 'test', 'data' )
+const dirname = path.join( __dirname, '..', 'test', 'data' )
 
-var emails = fs.readdirSync( dirname )
+const emails = fs.readdirSync( dirname )
   .filter( function( filename ) {
     return /\.txt$/.test( filename )
   }).map( function( filename ) {
@@ -17,9 +17,9 @@ var emails = fs.readdirSync( dirname )
 emails.forEach( function( filename ) {
 
   bench( `${path.basename( filename )} ⨉ ${ITERATIONS}`, function( run ) {
-    var buffer = fs.readFileSync( filename )
+    const buffer = fs.readFileSync( filename )
     run.start()
-    for( var i = 0; i < ITERATIONS; i++ ) {
+    for( let i = 0; i < ITERATIONS; i++ ) {
       new Envelope( buffer )
     }
     run.end()

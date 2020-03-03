@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-var Envelope = require( '..' )
-var fs = require( 'fs' )
-var argv = process.argv.slice( 2 )
-var inspect = require( '../test/inspect' )
+const Envelope = require( '..' )
+const fs = require( 'fs' )
+const argv = process.argv.slice( 2 )
+const inspect = require( '../test/inspect' )
 
 console.log( inspect( new Envelope( fs.readFileSync( argv.shift() ) ) ) )

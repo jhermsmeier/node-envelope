@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
   extends: ['eslint:recommended'],
   env: {
@@ -14,6 +14,12 @@ module.exports = {
     }
   ],
   rules: {
-    'no-empty': ['error', {allowEmptyCatch: true}]
+    semi: ['error', 'never'],
+    'no-empty': ['error', {allowEmptyCatch: true}],
+    'no-var': ['error'],
+    'prefer-const': ['error'],
+    'prefer-destructuring': ['error'],
+    'object-shorthand': ['error'],
+    'quotes': ['error', 'single']
   }
-};
+}
