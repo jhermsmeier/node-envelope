@@ -41,7 +41,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "nyc mocha",
+    "test": "nyc --clean mocha",
     "benchmark": "nanobench benchmark/*.js"
   }
 }
