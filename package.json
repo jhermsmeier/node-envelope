@@ -21,7 +21,8 @@
   },
   "devDependencies": {
     "mocha": "^5.1.1",
-    "nanobench": "^2.1.1"
+    "nanobench": "^2.1.1",
+    "nyc": "^15.0.0"
   },
   "homepage": "https://github.com/jhermsmeier/node-envelope",
   "repository": {
@@ -32,7 +33,7 @@
     "url": "https://github.com/jhermsmeier/node-envelope/issues"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "benchmark": "nanobench benchmark/*.js"
   }
 }
