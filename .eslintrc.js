@@ -1,19 +1,18 @@
 'use strict'
+
 module.exports = {
-  extends: ['eslint:recommended'],
+  extends: [ 'eslint:recommended' ],
   env: {
     node: true,
-    es6: true
+    es6: true,
   },
   overrides: [
     {
       files: 'test/**',
-      env: {
-        mocha: true
-      }
+      env: { mocha: true },
     }
   ],
   rules: {
-    'no-empty': ['error', {allowEmptyCatch: true}]
+    'no-empty': [ 'error', { allowEmptyCatch: true } ],
   }
 }
