@@ -19,19 +19,20 @@
   "main": "lib/envelope.js",
   "types": "./dist/envelope.d.ts",
   "dependencies": {
-    "content-disposition": "^0.5.3",
-    "content-type": "^1.0.4",
-    "iconv-lite": "^0.5.1"
+    "content-disposition": "^0.5.4",
+    "content-type": "^1.0.5",
+    "iconv-lite": "^0.6.3"
   },
   "devDependencies": {
-    "@types/content-disposition": "^0.5.5",
-    "@types/content-type": "^1.1.5",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "^20.2.3",
-    "eslint": "^6.8.0",
+    "@types/content-disposition": "^0.5.8",
+    "@types/content-type": "^1.1.8",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.10.5",
+    "eslint": "^8.56.0",
     "mocha": "^5.2.0",
-    "nanobench": "^2.1.1",
-    "nyc": "^15.0.0"
+    "nanobench": "^3.0.0",
+    "nyc": "^15.1.0",
+    "typescript": "^5.3.3"
   },
   "homepage": "https://github.com/jhermsmeier/node-envelope",
   "repository": {

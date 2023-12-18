@@ -54,7 +54,6 @@ declare class Envelope extends Array<any> {
     parse(buffer: Buffer | string, offset?: number | undefined, length?: number | undefined): Envelope;
 }
 declare namespace Envelope {
-    const Header_1: typeof import("./header");
-    export { Header_1 as Header };
+    let Header: typeof import("./header");
 }
 //# sourceMappingURL=envelope.d.ts.map

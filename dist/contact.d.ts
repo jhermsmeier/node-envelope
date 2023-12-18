@@ -35,6 +35,6 @@ declare class Contact {
     toString(): string;
 }
 declare namespace Contact {
-    const patterns: Array<[RegExp, number, number?]>;
+    let patterns: Array<[RegExp, number, number?]>;
 }
 //# sourceMappingURL=contact.d.ts.map
